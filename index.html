@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Commerce Landing Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    html {
+  scroll-behavior: smooth;
+}
+    body {
+      scroll-behavior: smooth;
+    }
+
+    /* Navigation */
+    nav {
+      position: sticky;
+      top: 0;
+      background-color: #333;
+      padding: 1em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1em;
+    }
+
+    nav ul li {
+      position: relative;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 0.5em;
+    }
+
+    nav a:hover {
+      background-color: #555;
+      border-radius: 5px;
+    }
+
+    nav ul li:hover .dropdown {
+      display: block;
+    }
+
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      margin-top: 10px;
+      background: #444;
+      list-style: none;
+    }
+
+    .dropdown li a {
+      display: block;
+      padding: 0.5em 1em;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: url('https://via.placeholder.com/1200x500') center/cover no-repeat;
+      color: white;
+      text-align: center;
+      padding: 100px 20px;
+      margin-bottom: 40px;
+    }
+
+    .hero h1 {
+      font-size: 3em;
+    }
+
+    .hero p {
+      margin: 1em 0;
+    }
+
+    .cta {
+      padding: 0.7em 1.5em;
+      background-color: crimson;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    /* Video Section */
+    .video-section {
+      position: relative;
+      width: 100%;
+    }
+
+    .video-section video {
+      width: 100%;
+      height: auto;
+    }
+
+    .video-caption {
+      position: absolute;
+    bottom: 28px;
+    /* left: 10px; */
+    background: rgb(60 60 60 / 37%);
+    color: white;
+    padding: 0.5em 1em;
+    width: 100%;
+    text-align: center;
+    font-size: 2em;
+    font-weight: 200;
+    }
+
+    /* Product Grid */
+    .products {
+      padding: 2em;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1em;
+    }
+
+    .product {
+          border: 1px solid #ddd;
+    /* padding: 1em; */
+    text-align: center;
+    border-radius: 22px;
+    box-shadow: 1px 1px 12px -5px #666;
+    background: black;
+    color: white;
+    padding-bottom: 18px;
+    }
+
+    .product img {
+    width: 100%;
+    height: auto;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+    }
+
+    .product h3 {
+      margin: 0.5em 0;
+    }
+
+    .buy-btn {
+      background: #333;
+      color: white;
+      padding: 0.5em 1em;
+      display: inline-block;
+      text-decoration: none;
+      margin-top: 0.5em;
+    }
+
+    /* Features Section */
+    .features {
+      display: flex;
+      justify-content: space-around;
+      padding: 2em;
+      background: #f9f9f9;
+    }
+
+    .feature {
+      text-align: center;
+    }
+
+    .feature img {
+      width: 60px;
+      margin-bottom: 0.5em;
+    }
+
+    /* Footer */
+    footer {
+      background: #333;
+      color: white;
+      padding: 2em;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    footer div {
+      flex: 1 1 200px;
+      margin: 1em;
+    }
+
+    footer a {
+      color: white;
+      text-decoration: none;
+      display: block;
+      margin: 0.2em 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .products {
+        grid-template-columns: 1fr;
+      }
+
+      .features {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+    /* Hamburger Styling */
+#menu-toggle {
+  display: none;
+}
+
+.hamburger {
+  display: none;
+  font-size: 1em;
+  color: white;
+  cursor: pointer;
+}
+
+/* Responsive Nav */
+@media (max-width: 768px) {
+  nav {
+    flex-wrap: wrap;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: #333;
+  }
+
+  #menu-toggle:checked + .hamburger + .nav-links {
+    display: flex;
+  }
+
+  .nav-links li {
+    text-align: center;
+    padding: 0.5em 0;
+  }
+
+  .dropdown {
+    position: static;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+  <div class="logo"><a href="#">LuxuryCars</a></div>
+  
+  <input type="checkbox" id="menu-toggle" />
+  <label for="menu-toggle" class="hamburger">&#9776;</label>
+
+  <ul class="nav-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">About</a></li>
+    <li>
+      <a href="#">Products</a>
+      <ul class="dropdown">
+        <li><a href="#products">New Arrivals</a></li>
+        <li><a href="#products">Best Sellers</a></li>
+      </ul>
+    </li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+
+  <!-- Hero Section -->
+  <section class="hero" style="background: url('assets/car_bg2.jpg') center/cover no-repeat;">
+    <h1>Welcome to LuxuryCars</h1>
+    <p>Your one-stop shop for cars!</p>
+    <a href="#products" class="cta">Shop Now</a>
+  </section>
+
+  <!-- Video Section -->
+  <section class="video-section">
+    <video src="assets/car2.mp4" autoplay muted loop></video>
+    <div class="video-caption">HAPPINESS IS THE SMELL OF A NEW CAR</div>
+  </section>
+
+  <!-- Product Grid -->
+  <section class="products" id="products">
+    <div class="product">
+      <img src="assets/car1.jpg" alt="Product">
+      <h3>Mustang</h3>
+      <p>$79999</p>
+      <a href="#" class="buy-btn">Buy Now</a>
+    </div>
+    <div class="product">
+      <img src="assets/car2.jpg" alt="Product">
+      <h3>Range Rover</h3>
+      <p>$29999</p>
+      <a href="#" class="buy-btn">Buy Now</a>
+    </div>
+    <div class="product">
+      <img src="assets/car3.jpg" alt="Product">
+      <h3>Lamborghini</h3>
+      <p>$23000000</p>
+      <a href="#" class="buy-btn">Buy Now</a>
+    </div>
+    <div class="product">
+      <img src="assets/car4.jpg" alt="Product">
+      <h3>Thar</h3>
+      <p>$234359</p>
+      <a href="#" class="buy-btn">Buy Now</a>
+    </div>
+    <div class="product">
+      <img src="assets/car5.jpg" alt="Product">
+      <h3>Cadilac</h3>
+      <p>$5445549</p>
+      <a href="#" class="buy-btn">Buy Now</a>
+    </div>
+    <div class="product">
+      <img src="assets/car6.jpg" alt="Product">
+      <h3>Ambassador</h3>
+      <p>$699920</p>
+      <a href="#" class="buy-btn">Buy Now</a>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <div class="feature">
+      <img src="assets/fast_shipping.jpg"style="width: 70px;" alt="Shipping">
+      <p>Fast Delivery</p>
+    </div>
+    <div class="feature">
+      <img src="assets/customer_support.png"style="width: 35px;" alt="Support">
+      <p>24/7 Support</p>
+    </div>
+    <div class="feature">
+      <img src="assets/credit-card.png" style="width: 35px;" alt="Secure">
+      <p>Secure Payments</p>
+    </div>
+    <div class="feature">
+      <img src="https://cdn-icons-png.flaticon.com/512/126/126122.png" style="width: 35px;"  alt="Return">
+      <p>10 days Returns</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div>
+      <h4>Connect</h4>
+      <a href="https://facebook.com" target="_blank">Facebook</a>
+      <a href="https://instagram.com" target="_blank">Instagram</a>
+      <a href="#">Twitter</a>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <a href="#">Home</a>
+      <a href="#">Products</a>
+      <a href="#">Contact</a>
+    </div>
+    <div id="contact">
+      <h4>Contact Us</h4>
+      <p>Email: luxurycars.com</p>
+      <p>Phone: +91-9167986142</p>
+    </div>
+    <div>
+      <p>&copy; 2025 LuxuryCars. All Rights Reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
